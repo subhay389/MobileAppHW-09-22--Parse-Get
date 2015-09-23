@@ -2,7 +2,7 @@ var myApp = angular.module('app', ['ionic']);
 
 myApp.controller ('firstController', function($scope, ParseHttpService ){
     $scope.text = "Subhay";
-    $scope.items = ParseHttpService.apiResponseData;
+    $scope.items =apiResponseData;
 
     $scope.currentUser = null;
     $scope.apiResponseData = {};
