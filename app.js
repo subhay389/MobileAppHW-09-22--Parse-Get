@@ -1,54 +1,21 @@
 var myApp = angular.module('app', ['ionic']);
 
-myApp.controller ('firstController', function($scope, ParseHttpService ){
-    $scope.text = "Subhay";
-    $scope.items =apiResponseData;
 
-    $scope.currentUser = null;
-    $scope.apiResponseData = {};
-    $scope.uiData = {};
-
-    function _alertHandler(_error) {
-        alert("ERROR " + JSON.stringify(_error, null, 2));
-    }
-    /**
-     * logs the user into the application
-     */
-    $scope.doLogin = function () {
-        return ParseHttpService.login().then(function (_response) {
-            $scope.currentUser = _response;
-            $scope.apiResponseData = _response;
-        }, _alertHandler);
-    }
-
-    $scope.getStuffList = function () {
-            return ParseHttpService.getStuff("").then(function (_response) {
-                var apiResponseData = _response;
-                console.log(apiResponseData);
-                $scope.apiResponseData = _response;
-            }, _alertHandler);
-        }
-        
-
-
-
-});
-
-myApp.service('ParseHttpService', function ($http) 
+myApp.service('firstService', function ($http) 
 {
         var baseURL = "https://api.parse.com/1/";
-        var authenticationHeaders = {
+        var authenticationHeaders = 
+        {
         "x-parse-application-id": "5as9DptmDSswxIrKPUoVbOiBL731Iq2CRwa128uB",
         "x-parse-rest-api-key": "Bd8NNbrxgeLckkeJ7zdXjZOMGYr0saXNVyIVfCDF"
-    };
+         };
 
-        return
-         {
-            /**
-             * [[Description]]
-             * @returns {Promise} [[Description]]
-             */
-            login: function()
+
+		// CODE GOES HERE
+        // these are functions exposed to public
+        return{ 
+
+            login: function () 
             {
 
                 var credentials = {
@@ -63,8 +30,7 @@ myApp.service('ParseHttpService', function ($http)
                     // params are for query string parameters
                     params: credentials
                 };
-
-                // $http returns a promise, which has a then function,
+                            // $http returns a promise, which has a then function,
                 // which also returns a promise
                 return $http(settings)
                     .then(function (response) {
@@ -73,17 +39,15 @@ myApp.service('ParseHttpService', function ($http)
                         console.log('login', response);
                         return response.data;
                     });
-            },
+            }    
 
-            /**
-             * gets a specific stuff item based on the id provided, if no id then 
-             * return all stuff items
-             * 
-             * @param   {String}   _id object id in parse
-             * @returns {Promise} [[Description]]
-             */
+
+                    /**
+            * returns all of the data
+            */
             getStuff: function (_id) 
             {
+
                 // if an id is passed in then use it when querying
                 // stuff data
                 var settings = {
@@ -95,14 +59,34 @@ myApp.service('ParseHttpService', function ($http)
                 // $http returns a promise, which has a then function,
                 // which also returns a promise
                 return $http(settings)
-                    .then(function (response) 
-                    {
+                    .then(function (response) {
                         // In the response resp.data contains the result
                         // check the console to see all of the data returned
                         console.log('getStuff', response);
-                        console.log(response);
                         return response.data;
                     });
-            },
-        }
-    });
+            }
+        }; 
+});
+
+
+
+myApp.controller ('firstController', function($scope, firstService)
+{
+	$scope.text = "Subhay";
+	$scope.itemsList = {};
+    $scope.currentUser = null;
+    $scope.uiData = {};
+
+	firstService.login().then(function (_response) {
+                $scope.currentUser = _response;
+                $scope.itemsList = _response;
+            }
+
+    firstService.getStuff("").then(function (_response)
+     {
+                $scope.itemsList = _response;
+            }
+
+});
+
