@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app" >
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -7,21 +7,25 @@
     <script src="https://code.ionicframework.com/1.0.0/js/ionic.bundle.js"></script>
     <script src = "app.js"></script>
   </head>
-  <body ng-app="app" ng-controller = "firstController">
+  <body ng-controller = "firstController" >
     <ion-pane>
       <ion-header-bar class="bar-stable">
         <h1 class="title">Awesome App</h1>
       </ion-header-bar>
       <ion-content class="padding">
-        
+        <button class="button button-assertive">I'm a button</button>
+            
+            {{text}}
             
         <ion-list>
-          <div ng-repeat = "item in items track by $index">
-              
-              {{item | json}}
-
-          </div>    
+              <ion-item ng-repeat="item in itemsList track by $index">
+                {{$index}} - {{item.name}} - {{item.room}}
+                <p>Item = {{item | json}} $index= {{$index}}</p>
+            </ion-item>
         </ion-list>
+
+      
+
 
       </ion-content>
     </ion-pane>
