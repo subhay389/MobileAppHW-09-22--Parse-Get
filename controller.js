@@ -1,4 +1,3 @@
-
 myApp.controller('homeCtrl', function($scope, $state, firstService) {
   $scope.text = '';
   $scope.itemsList = {};
@@ -6,8 +5,7 @@ myApp.controller('homeCtrl', function($scope, $state, firstService) {
   $scope.stateInfo = $state.current;
   $scope.stuffFromParse = '';
 
-  $scope.inputItem = 
-  {
+  $scope.inputItem = {
     value: "",
     name: "",
     room: ""
@@ -19,8 +17,7 @@ myApp.controller('homeCtrl', function($scope, $state, firstService) {
     });
   };
 
-
-  $scope.load = function(){
+  $scope.load = function() {
     $scope.text = "This is after the click of the button";
 
     firstService.getStuff().then(function(_response) {
@@ -28,7 +25,7 @@ myApp.controller('homeCtrl', function($scope, $state, firstService) {
     });
   }
 
-    $scope.stuffFromParse = "Stuff from parse";
+  $scope.stuffFromParse = "Stuff from parse";
 
   $scope.goToDetailState = function(_id) {
     $state.go("detail", {
@@ -71,10 +68,10 @@ myApp.controller('homeCtrl', function($scope, $state, firstService) {
         .then(function itemUpdated(_updatedItem) {
           //  alert("Item Updated " + _updatedItem.objectId);
 
-      populateList();
-              firstService.getStuff().then(function(_response) {
-      $scope.itemsList = _response;
-    });
+          populateList();
+          firstService.getStuff().then(function(_response) {
+            $scope.itemsList = _response;
+          });
 
         }, function errorSaving(_error) {
           // alert("Error Editing Object " + _error)
@@ -91,11 +88,11 @@ myApp.controller('homeCtrl', function($scope, $state, firstService) {
       .then(function itemSaved(_deletedObject) {
         //  alert("Item Deleted " + _deletedObject.objectId);
 
-      populateList();
+        populateList();
 
-    firstService.getStuff().then(function(_response) {
-      $scope.itemsList = _response;
-    });
+        firstService.getStuff().then(function(_response) {
+          $scope.itemsList = _response;
+        });
 
       }, function errorDeleting(_error) {
         // alert("Error Deleting Object " + _objectId)
@@ -118,9 +115,9 @@ myApp.controller('homeCtrl', function($scope, $state, firstService) {
           $scope.inputItem = {};
 
           populateList();
-              firstService.getStuff().then(function(_response) {
-      $scope.itemsList = _response;
-    });
+          firstService.getStuff().then(function(_response) {
+            $scope.itemsList = _response;
+          });
 
         }, function errorSaving(_error) {
           $scope.inputItem = {};
@@ -133,16 +130,11 @@ myApp.controller('homeCtrl', function($scope, $state, firstService) {
 
 });
 
-
-
-
-
-  
 myApp.controller('detailCtrl', function($scope, $state, firstService) {
   $scope.itemDetail = '';
   $scope.stateInfo = $state.current;
   $scope.detailParams = $state.params;
-    //$scope.detailStuff = firstService.itemByIndex($state.params.obhectid)
+  //$scope.detailStuff = firstService.itemByIndex($state.params.obhectid)
   firstService.getStuffById($state.params.objectId).then(function(_data) {
     console.log(_data);
     $scope.itemDetail = _data;
