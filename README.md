@@ -1,5 +1,3 @@
-# MobileAppHW-09-22--Parse-GetThe getStuffByID function i found in your code did not run in my program. So thats why i could not render the stuff details in the DETAIL state. 
-I seem to connect the delete and update stuff but the items does not update. I tried very hard
-
-
-i Will try more to do it. 
+# MobileAppHW-09-22--Report
+It works but when i tried to implement different html files, it gave me error so for now I put everything in one. 
+When i add items, it works perfectly but it throws this error --TypeError: Cannot read property 'data' of undefined --- This error is of populate function in the controller file  
