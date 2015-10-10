@@ -7,6 +7,7 @@
   <link href="http://code.ionicframework.com/1.0.0/css/ionic.min.css" rel="stylesheet">
   <script src="http://code.ionicframework.com/1.0.0/js/ionic.bundle.js"></script>
   <script src="app.js"></script>
+  <script src = "controller.js"></script>
 </head>
 
 <body ng-app="app">
@@ -17,44 +18,74 @@
     </ion-nav-back-button>
   </ion-nav-bar>
   <ion-nav-view animation="slide-left-right"></ion-nav-view>
-
+  
   <script type="text/ng-template" id="home.html">
     <ion-view title="Home">
-      <ion-content class="padding">
+    <ion-content class="padding">
 
-        <button ng-click="loginButton()" class="button button-light">
-          Click this first to login
+      <button ng-click="loginButton()" class="button button-light">
+        Click this first to login
+      </button>
+
+      {{"Login ID: " }}{{loginDetail.username}}
+
+      <button class="button button-assertive button-block" ng-click="load()">
+        Click to Load items from Parse
+      </button>
+
+      <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="Input the item you want to add: (name, room number)" ng-model="inputItem.value">
+          </label>
+      </div>
+
+        <button class="button button-assertive button-block" ng-click="addItem()">
+          Click to Add
         </button>
+       
+        <ion-item class="item-divider">
+          {{stuffFromParse}}
+        </ion-item>
 
-        <button ng-click="load()" class="button button-assertive">
-          Click to load stuff from parse
-        </button>
 
-        <ion-list>
-          <ion-item class="item-divider">
-            {{stuffFromParse}}
-          </ion-item>
-          {{"Login ID " }}{{loginDetail.username}}
-          <ion-item ng-repeat="item in itemsList track by item.objectId" ng-click="goToDetailState(item.objectId)">
-            {{item.objectId}} - {{item.name}} - {{item.room}}
-            <br>
+        <ion-item>
+        
+          <ion-list ng-repeat="item in itemsList track by item.objectId">
+
+            <ion-item  ng-click="goToDetailState(item.objectId)">
+              ObjectID - {{item.objectId}}     object Name- {{item.name}}       Room- {{item.room}}
+              <br>
+            </ion-item>
+
             <p>Item = {{item | json}} $index= {{$index}}</p>
-          </ion-item>
-        </ion-list>
 
-      </ion-content>
-    </ion-view>
+            <div class="text-right">
+                <button class="ion-edit button"
+                        ng-click="editObject(item)">
+                </button>
+      
+                <button class="ion-minus-circled button"
+                        ng-click="deleteObject(item.objectId)">
+                </button>
+            </div>  
+
+          
+          </ion-list>
+        </ion-item>
+          
+    </ion-content>
+  </ion-view>
   </script>
 
 
   <script type="text/ng-template" id="detail.html">
     <ion-view title="Detail">
       <ion-content class="padding">
-        <div>{{item.name}}</div>
-        <div>{{item.room}}</div>
+        <div>{{itemDetail.name}}</div>
+        <div>{{itemDetail.room}}</div>
         <pre class="padding">{{stateInfo | json}}</pre>
         <pre class="padding">{{detailParams | json}}</pre>
-        <pre class="padding">{{item[item.objectId] | json}}</pre>
+        <pre class="padding">{{itemDetail | json}}</pre>
       </ion-content>
     </ion-view>
   </script>
