@@ -47,7 +47,7 @@ myApp.service('firstService', function($http) {
       // $http returns a promise, which has a then function,
       // which also returns a promise
       return $http(settings)
-        .then(function (response) {
+        .then(function(response) {
           // In the response resp.data contains the result
           // check the console to see all of the data returned
           console.log('login', response);
@@ -71,7 +71,7 @@ myApp.service('firstService', function($http) {
       // $http returns a promise, which has a then function,
       // which also returns a promise
       return $http(settings)
-        .then(function (response) {
+        .then(function(response) {
           // In the response resp.data contains the result
           // check the console to see all of the data returned
           console.log('getStuff', response);
@@ -96,7 +96,7 @@ myApp.service('firstService', function($http) {
 
       // $http returns a promise, which has a then function
       return $http.post(baseURL + 'classes/stuff', dataObjectString, settings)
-        .then(function (response) {
+        .then(function(response) {
           // In the response resp.data contains the result
           // check the console to see all of the data returned
           console.log('addObject', response);
@@ -125,7 +125,7 @@ myApp.service('firstService', function($http) {
       // $http returns a promise, which has a then function,
       // which also returns a promise
       return $http.put(apiUrl, dataObjectString, settings)
-        .then(function (response) {
+        .then(function(response) {
           // In the response resp.data contains the result
           // check the console to see all of the data returned
           console.log('updateObject', response);
@@ -142,7 +142,7 @@ myApp.service('firstService', function($http) {
       // $http returns a promise, which has a then function,
       // which also returns a promise
       return $http.delete(baseURL + 'classes/stuff/' + _id, settings)
-        .then(function (response) {
+        .then(function(response) {
           // In the response resp.data contains the result
           // check the console to see all of the data returned
           console.log('deleteObjectById', response);
@@ -173,9 +173,3 @@ myApp.service('firstService', function($http) {
     //   }
   };
 });
-
-
-
-
-
-
